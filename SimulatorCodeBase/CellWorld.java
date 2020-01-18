@@ -43,18 +43,54 @@ public class CellWorld implements World {
 	
 	@Override
 	public World loadSimulation(String filename) {		
+		SetUp(filename);
+		return null;
+	}
+
+	private void SetUp (String filename) {
 		File file = new File(filename); 
 		Scanner sc;
 		try {
 			sc = new Scanner(file); 
-			while (sc.hasNextLine()) 
-			      System.out.println(sc.nextLine());
+			sc.useDelimiter(" \n");
+			String line;
+			while (sc.hasNextLine()) {
+				
+				line = sc.next();
+				
+				if (line.equalsIgnoreCase("[AVATAR]")) {
+					
+					String pName="Anonymous";
+					String pPseudo="A";
+					int pX=0;
+					int pY=0;
+					
+					while (!line.startsWith("[")) {
+						line = sc.next();
+						if (line.equalsIgnoreCase("name")) {
+							pName = sc.next();
+						} 
+						if (line.equalsIgnoreCase("pseudonym")) {
+							pPseudo = sc.next();
+						} 
+						if (line.equalsIgnoreCase("x")) {
+							pX = Integer.parseInt(sc.next());
+						} 
+						if (line.equalsIgnoreCase("y")) {
+							pY = Integer.parseInt(sc.next());
+						}
+					}
+					aAvatar = new Avatar(pName, pPseudo, pX, pY);
+				}
+				
+				if (line.equalsIgnoreCase("[TERRAIN]")) {
+					
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		return null;
 	}
-
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub

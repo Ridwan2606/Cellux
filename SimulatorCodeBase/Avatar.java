@@ -7,9 +7,9 @@ public class Avatar implements Character {
 	private int aY;
 	private String aPseudonym;
 	
-	public Avatar(String pName, String pPseudonym) {
-		aX = 0;
-		aY = 0;
+	public Avatar(String pName, String pPseudonym, int pX, int pY) {
+		aX = pX;
+		aY = pY;
 		aName = pName;
 		aPseudonym = pPseudonym;
 	}
