@@ -5,21 +5,21 @@ public class Avatar implements Character {
 	private String aName;
 	private int aX;
 	private int aY;
-	private String aDescription;
+	private String aPseudonym;
 	
-	public Avatar(String pName, String pDescription) {
+	public Avatar(String pName, String pPseudonym) {
 		aX = 0;
 		aY = 0;
 		aName = pName;
-		aDescription = pDescription;
+		aPseudonym = pPseudonym;
 	}
 	
 	public String getName() {
 		return aName;
 	}
 
-	public String getDescription() {
-		return aDescription;
+	public String getPseudonym() {
+		return aPseudonym;
 	}
 	
 	public int getX() {
