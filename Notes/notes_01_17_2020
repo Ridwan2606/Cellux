@@ -1,0 +1,105 @@
+World w = World.loadSim("world.ini");
+/*
+If defining an interface as in 
+Interface Myworlds{
+    .
+    .
+    .
+}
+
+and then the class world would need to implement Myworlds:
+Class World implement MyWorlds{
+    .
+    .
+}
+Then instead of the uncommented line above, you can create a new world like this:
+MyWorld w2 = w2.loadSim("....");
+*/
+
+while (!w.endOfSim()){ //(!endOfSim(w))
+    // you would want to end the simulation if
+    // 1. Iterate n times
+    // 2. There is some kind of goal to be achieved
+    // 3. Both of the above. Goal or n times.
+    w.display();
+    x=scanner.nextLine();
+    w.updateSim(x);
+}
+w.closeSim();
+
+class World{
+    Autonomous b[]; // x,y,type => alg()   [kinda similar to avatar]
+    Avatar a = new Avatar ();
+    SimObject o[] = new SimObject[100]
+    .
+    .
+    .
+}
+
+String token;
+token = p.next();
+while (p.hasNext()){
+    if (token.equals("[terrain"])){
+        token = p.next();
+        while (!token.equals("[Avatar]")){
+            token = p.next();
+        }
+    }
+
+    if (token.equals("[Avatar"])){
+       .
+       .
+       .
+    }
+
+}
+
+displaySim function:
+
+static void drawGrid() {
+    int width = 10, height = 10;
+    int i,j;
+
+    JLabel[][] LabelArray = new JLabel[width][height];
+
+    JFrame mainFrame = new JFrame("The World");
+    mainFrame.setSize(1000,1000);
+    mainFrame.setLayout(new GridLayout(1, 1));                         
+
+    JPanel grid = new JPanel();                                        
+    grid.setLayout(new GridLayout(width, height));
+
+    mainFrame.add(grid);
+
+    for(i=0;i<width;i++) {
+        for (j = 0; j < height; j++) {
+            JLabel current = new JLabel("",SwingConstants.CENTER);
+            current.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            current.setOpaque(true);
+
+            if (j%2==0) current.setBackground(Color.blue);
+            else current.setBackground(Color.green);
+
+            if (j+i == 10) current.setText("Hello");
+
+            LabelArray[i][j] = current;
+            grid.add(LabelArray[i][j]);
+        }
+    }
+
+    mainFrame.setVisible(true);
+}
+
+void updateSim ( String cmd ) {
+    if (cmd.equals("SOUTH")){
+        if (a.x + 1 < m ){
+            world[a.x][a.y] = "";
+            a.x ++;
+            world[a.x+1][a.y] = "A";
+        }
+    }
+    .
+    .
+    .
+    
+}
