@@ -42,11 +42,21 @@ public class CellWorld implements World {
 	public static void main(String[] args) {
 		CellWorld w = new CellWorld();
 		w.loadSimulation("SimulatorCodeBase/world.ini");
+		System.out.println("Ended Simulation");
 	}
 	
 	public World loadSimulation(String filename) {	
 		initialiseWindow();
 		SetUp(filename);
+		aMainFrame.setVisible(true);
+		SwingUtilities.updateComponentTreeUI(aMainFrame);
+		
+		try {
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
@@ -61,14 +71,13 @@ public class CellWorld implements World {
 		Scanner sc;
 		try {
 			sc = new Scanner(file); 
-			sc.useDelimiter(" \n");
+			sc.useDelimiter("\\s");
 			String line;
 			while (sc.hasNextLine()) {
 				
 				line = sc.next();
 				
 				if (line.equalsIgnoreCase("[AVATAR]")) {
-					
 					String pName="Anonymous";
 					String pPseudo="A";
 					int pX=0;
@@ -96,26 +105,32 @@ public class CellWorld implements World {
 					
 					int rowSize = 0;
 					int colSize = 0;
-				
+					line = sc.next();
+					
 					while (!line.contains("{")) {
-						line = sc.next();
+						
 						if (line.equalsIgnoreCase("rowsize=")) {
 							rowSize = Integer.parseInt(sc.next());
 						} 
 						if (line.equalsIgnoreCase("colsize=")) {
 							colSize = Integer.parseInt(sc.next());
 						} 
+						
+						line = sc.next();
 					}
-					
 					aTerrain = new TerrainGUIPair[rowSize][colSize];
 				    grid.setLayout(new GridLayout(rowSize, colSize));
 				    aMainFrame.add(grid);
 				    
+				    sc.next();
+				    
 					for (int i=0; i<rowSize; i++) {
-						for (int j=0; i<colSize; j++) {
+						for (int j=0; j<colSize; j++) {
 							String terrainSymbol = sc.next();
-							addTerrainFromIni(terrainSymbol,i,j);
+							addTerrain(terrainSymbol,i,j);
 						}
+						sc.next();
+						System.out.println();
 					}
 					sc.next();
 				}
@@ -126,7 +141,7 @@ public class CellWorld implements World {
 		}
 	}
 	
-	private void addTerrainFromIni(String terrainSymbol, int pX, int pY) {
+	private void addTerrain(String terrainSymbol, int pX, int pY) {
 		
 		JLabel current = new JLabel("",SwingConstants.CENTER);
         current.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -140,7 +155,7 @@ public class CellWorld implements World {
 			current.setBackground(Color.blue);
 		} else {
 			cell = new GroundCell(pX, pY);
-			current.setBackground(Color.blue);
+			current.setBackground(Color.green);
 		}
 		
 		pair = new TerrainGUIPair(cell,current);
@@ -161,7 +176,6 @@ public class CellWorld implements World {
 
 	@Override
 	public boolean isSimulationOver() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
