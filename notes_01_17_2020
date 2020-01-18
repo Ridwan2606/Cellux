@@ -15,6 +15,7 @@ Class World implement MyWorlds{
 Then instead of the uncommented line above, you can create a new world like this:
 MyWorld w2 = w2.loadSim("....");
 */
+
 while (!w.endOfSim()){ //(!endOfSim(w))
     // you would want to end the simulation if
     // 1. Iterate n times
