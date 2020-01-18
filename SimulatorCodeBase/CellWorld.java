@@ -13,38 +13,47 @@ import javax.swing.*;
 
 public class CellWorld implements World {
 	
-	private class Pair<T,U> {
+	private class TerrainGUIPair {
 		
-		private T right;
-		private U left;
+		private TerrainCell right;
+		private JLabel left;
 		
-		public Pair(T t, U j) {
+		public TerrainGUIPair(TerrainCell t, JLabel j) {
 			right = t;
 			left = j;
 		}
 		
-		public T getCell() {
+		public TerrainCell getCell() {
 			return right;
 		}
 		
-		public U getGUI() {
+		public JLabel getGUI() {
 			return left;
 		}
 	}
 
 	private Avatar aAvatar;
 	private ArrayList<Character> aAutonomousChars = new ArrayList<Character>();
-	private Pair<TerrainCell,JLabel>[][] aTerrain;
+	private TerrainGUIPair[][] aTerrain;
 
+    JFrame aMainFrame;
+    JPanel grid = new JPanel();
+	
 	public static void main(String[] args) {
 		CellWorld w = new CellWorld();
 		w.loadSimulation("SimulatorCodeBase/world.ini");
 	}
 	
-	@Override
-	public World loadSimulation(String filename) {		
+	public World loadSimulation(String filename) {	
+		initialiseWindow();
 		SetUp(filename);
 		return null;
+	}
+
+	private void initialiseWindow() {
+		aMainFrame = new JFrame("The World");
+		aMainFrame.setSize(1000,650);
+		aMainFrame.setLayout(new GridLayout(1, 1));
 	}
 
 	private void SetUp (String filename) {
@@ -67,16 +76,16 @@ public class CellWorld implements World {
 					
 					while (!line.startsWith("[")) {
 						line = sc.next();
-						if (line.equalsIgnoreCase("name")) {
+						if (line.equalsIgnoreCase("name=")) {
 							pName = sc.next();
 						} 
-						if (line.equalsIgnoreCase("pseudonym")) {
+						if (line.equalsIgnoreCase("pseudonym=")) {
 							pPseudo = sc.next();
 						} 
-						if (line.equalsIgnoreCase("x")) {
+						if (line.equalsIgnoreCase("x=")) {
 							pX = Integer.parseInt(sc.next());
 						} 
-						if (line.equalsIgnoreCase("y")) {
+						if (line.equalsIgnoreCase("y=")) {
 							pY = Integer.parseInt(sc.next());
 						}
 					}
@@ -85,12 +94,60 @@ public class CellWorld implements World {
 				
 				if (line.equalsIgnoreCase("[TERRAIN]")) {
 					
+					int rowSize = 0;
+					int colSize = 0;
+				
+					while (!line.contains("{")) {
+						line = sc.next();
+						if (line.equalsIgnoreCase("rowsize=")) {
+							rowSize = Integer.parseInt(sc.next());
+						} 
+						if (line.equalsIgnoreCase("colsize=")) {
+							colSize = Integer.parseInt(sc.next());
+						} 
+					}
+					
+					aTerrain = new TerrainGUIPair[rowSize][colSize];
+				    grid.setLayout(new GridLayout(rowSize, colSize));
+				    aMainFrame.add(grid);
+				    
+					for (int i=0; i<rowSize; i++) {
+						for (int j=0; i<colSize; j++) {
+							String terrainSymbol = sc.next();
+							addTerrainFromIni(terrainSymbol,i,j);
+						}
+					}
+					sc.next();
 				}
 			}
+			sc.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
+	
+	private void addTerrainFromIni(String terrainSymbol, int pX, int pY) {
+		
+		JLabel current = new JLabel("",SwingConstants.CENTER);
+        current.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        current.setOpaque(true);
+        
+        TerrainCell cell = null;
+        TerrainGUIPair pair = null;
+        
+		if (terrainSymbol.equalsIgnoreCase("w")) {
+			cell = new WaterCell(pX, pY);
+			current.setBackground(Color.blue);
+		} else {
+			cell = new GroundCell(pX, pY);
+			current.setBackground(Color.blue);
+		}
+		
+		pair = new TerrainGUIPair(cell,current);
+		aTerrain[pX][pY] = pair;
+		grid.add(current);
+	}
+	
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
