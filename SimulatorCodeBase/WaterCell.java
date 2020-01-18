@@ -2,12 +2,12 @@ package SimulatorCodeBase;
 
 import java.awt.Color;
 
-public class GroundCell extends AbstractCell {
+public class WaterCell extends AbstractCell {
+
+	private final String aName = "Water";
+	private final Color aColor = Color.blue;
 	
-	private final String aName = "Ground";
-	private final Color aColor = Color.green;
-	
-	public GroundCell(int pX, int pY) {
+	public WaterCell(int pX, int pY) {
 		aX = pX;
 		aY = pY;
 	}

@@ -1,6 +1,8 @@
 package SimulatorCodeBase;
 
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 
 public class test {
@@ -40,6 +42,19 @@ public class test {
 	    }
 
 	    mainFrame.setVisible(true);
+	    
+	    try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+        LabelArray[5][5].setBackground(Color.yellow);;
+        //grid.add(LabelArray[5][5]);
+        
+        //mainFrame.setVisible(false);
+        //mainFrame.setVisible(true);
+        SwingUtilities.updateComponentTreeUI(mainFrame);
 	}
 
 }
