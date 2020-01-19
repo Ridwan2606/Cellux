@@ -182,7 +182,7 @@ public class CellWorld implements World {
 			direction = Direction.WEST;
 		}
 		
-		if ( direction!=null & !isOutOfBound(aAvatar,direction)) moveCharacter(aAvatar,direction);
+		if ( direction!=null && !isOutOfBound(aAvatar,direction)) moveCharacter(aAvatar,direction);
 		
 	}
 	
