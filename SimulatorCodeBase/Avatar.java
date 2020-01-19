@@ -1,3 +1,8 @@
+/*
+ * Author: Ridwan Kurmally
+ * Git Repository: https://github.com/Ridwan2606/Simulator-Seminar
+ */
+
 package SimulatorCodeBase;
 
 public class Avatar implements Character {
@@ -30,7 +35,7 @@ public class Avatar implements Character {
 		return aY;
 	}
 
-	public void move(Directions d) {
+	public void move(Direction d) {
 		switch(d) {
 		  case NORTH:
 		    aY--;
