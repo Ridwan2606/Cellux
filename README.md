@@ -1,2 +1,5 @@
-# Simulator-Seminar
-My solution to the assignments given by Professor Joseph Vybihal during the Winter 2020 Simulator Seminar
+# Cellux
+
+This is a highly object-oriented Java project to simulate a 2.5 discrete cellular world with diverse avatars, living creatures, terrains as well as the interaction in this ecosystem. Currently in development.
+
+Inspired by Professor Joseph Vybihal’s seminars on simulators.
