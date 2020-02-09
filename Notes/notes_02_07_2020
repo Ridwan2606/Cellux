@@ -1,0 +1,89 @@
+N continents by Volcano method
+
+Assignment : n <- ask,random
+             grid <- ask, ''
+
+initialise terrain with 0
+
+1 -> Volcano seed
+
+            x
+ ------------------
+|   1               | y
+|              1    |
+|       1           |
+ ------------------
+There's also a z axis
+
+
+for ( i = 0 ; i < n ; i ++ ) {
+    x = rand()
+    y = rand()
+    grid[x][y]; fn() //overlap is ok
+    )
+}
+
+(given)
+input values: 
+    Generation length
+    vel height
+    noise distribution
+    max elevation
+    elevation distribution
+
+loop for generation length
+    x = //some volcano seed x location
+
+    for ( i = 0 ; i<vel ; i++){
+        x += noise_distribution();
+    }
+    y = //some volcano seed y location
+    for ( i = 0 ; i<vel ; i++){
+        d += noise_distribution(); 
+
+        
+    }
+    grid[x][y]+=1
+
+    // Recursion or loop until we land somewhere that's not at max height
+        if (grid[x][y] >= height){
+            if(elevation_distribution()=A) x++
+            else .....
+
+
+    }
+
+footprint [ Reduces workload ]
+
+N Random Height Footprints
+    Start grid all cells zero
+    N footprints <- ask,rand
+    //Array of footprints
+
+    for (i=0;i<N;i++){
+        x = rand()
+        y = rand()
+        d = distribution() //choose from array of footprints
+        for ( j -> length of foot){
+            x++
+            y++
+        }
+    }
+
+Fixed Geometry
+{   (length,width,height),
+    (l,w,h),   
+    ...}
+}
+
+// height ->  grid[x][y]+= height 
+// Height can be negative or position
+
+Rand shape
+{   (n,h),
+    ......  }
+
+Fixed Print:
+{ (0,y,h:1,y2,h2: ..),(...)}
+
+
