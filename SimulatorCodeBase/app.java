@@ -11,7 +11,7 @@ public class app {
 	
 	public static void main(String[] args) {
 		CellWorld w = new CellWorld("My Cell World");
-		w.loadSimulation("SimulatorCodeBase/world2.ini");
+		w.loadSimulation("SimulatorCodeBase/largeworld.ini");
 		Scanner sc = new Scanner(System.in);
 		while (!w.isSimulationOver()) {
 			w.display();
